@@ -61,7 +61,7 @@ public class ProductService {
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "O preço de custo e preço de venda do produto são obrigatórios " +
-                            "e devem ser maiores que 0 (zero)!");
+                            " pois não podem ser nulos e devem ser maiores que 0 (zero)!");
         }
     }
 
