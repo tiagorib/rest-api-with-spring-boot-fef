@@ -2,9 +2,11 @@ package br.com.fefproject.FefProjectApplication.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.data.annotation.ReadOnlyProperty;
 
 import java.math.BigDecimal;
@@ -28,6 +30,7 @@ public class Customer {
     private String lastNameCustomer;
 
     @Column(name = "cpf_customer", unique = true, nullable = false, length = 11)
+    @CPF
     private String cpfCustomer;
 
     @Column(name = "birthdate_customer", nullable = false)
@@ -46,6 +49,7 @@ public class Customer {
     private Boolean statusCustomer;
 
     @Column(name = "email_customer", nullable = false)
+    @Email
     private String emailCustomer;
 
     @Column(name = "password_customer", nullable = false)
