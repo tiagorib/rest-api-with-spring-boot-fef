@@ -2,7 +2,6 @@ package br.com.fefproject.FefProjectApplication.controller;
 
 import br.com.fefproject.FefProjectApplication.entity.Product;
 import br.com.fefproject.FefProjectApplication.exception.ResponseGenericException;
-import br.com.fefproject.FefProjectApplication.repository.ProductRepository;
 import br.com.fefproject.FefProjectApplication.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
