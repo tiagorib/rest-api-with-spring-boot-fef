@@ -4,11 +4,15 @@ import br.com.fefproject.FefProjectApplication.entity.Product;
 import br.com.fefproject.FefProjectApplication.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.swing.text.html.Option;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -22,8 +26,7 @@ public class ProductService {
 
     public Product saveProduct(Product product) {
 
-        if (product.getAmountProduct() != null &&
-                product.getAmountProduct().compareTo(BigDecimal.valueOf(0)) == 1) {
+        if (validateProduct(product)) {
             return productRepository.saveAndFlush(product);
         } else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
@@ -32,4 +35,46 @@ public class ProductService {
         }
     }
 
+    public HashMap<String, Object> deleteProduct(Long productId) {
+        Optional<Product> product =
+                Optional.ofNullable(productRepository.findById(productId).
+                        orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                                "Produto não encontrado!")));
+
+        productRepository.delete(product.get());
+        HashMap<String, Object> result = new HashMap<String, Object> ();
+        result.put("result", "Produto: " + product.get().getNameProduct() + " excluido com sucesso!");
+        return result;
+    }
+
+    public Optional<Product> findProductById(Long idProduct) {
+        return Optional.ofNullable(productRepository.findById(idProduct)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Produto não encontrado")));
+    }
+
+    public Product updateProduct(Product product) {
+        if (validateProduct(product)){
+            if (findProductById(product.getIdProduct()) != null) {
+                return productRepository.saveAndFlush(product);
+            }else {
+                return null;
+            }
+        }else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+                    "O preço de custo e preço de venda do produto são obrigadorios" +
+                            "e deven ser maior qur 0 (zero)! ");
+        }
+    }
+
+    public boolean validateProduct(Product product){
+        if (product.getAmountProduct() != null &&
+         product.getAmountProduct().compareTo(BigDecimal.valueOf(0)) == 1 &&
+         product.getCostPriceProduct() != null &&
+         product.getCostPriceProduct().compareTo(BigDecimal.valueOf(0)) == 1) {
+            return true;
+        }else {
+            return false;
+        }
+    }
 }

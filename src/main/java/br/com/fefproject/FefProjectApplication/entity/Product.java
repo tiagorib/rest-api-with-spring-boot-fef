@@ -1,10 +1,9 @@
 package br.com.fefproject.FefProjectApplication.entity;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
@@ -38,5 +37,6 @@ public class Product {
 
     @Column(name = "published_product", nullable = false)
     private Boolean publishedProduct;
+
 
 }
