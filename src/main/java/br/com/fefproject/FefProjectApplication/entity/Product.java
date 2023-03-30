@@ -1,21 +1,22 @@
 package br.com.fefproject.FefProjectApplication.entity;
 
-import jakarta.persistence.*;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_product")
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "id_product")
     private Long idProduct;
 
     @Column(name = "name_product", unique = true, nullable = false, length = 300)
