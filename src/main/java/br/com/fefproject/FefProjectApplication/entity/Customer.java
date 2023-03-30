@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -31,10 +32,11 @@ public class Customer {
     @Column(name = "cpf_customer", nullable = false, length = 14)
     private String cpfCustomer;
 
-    @Column(name = "birthdate_customer", nullable = false, length = 6)
+    @Column(name = "birthdate_customer", nullable = false)
     private LocalDate birthdateCustomer;
 
     @CreatedDate
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Column(name = "datecreated_customer",nullable = false, updatable = false)
     private LocalDate dateCreatedCustomer;
 
