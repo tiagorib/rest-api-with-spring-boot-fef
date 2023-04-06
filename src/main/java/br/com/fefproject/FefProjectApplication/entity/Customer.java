@@ -30,6 +30,8 @@ public class Customer {
     private String firstNameCustomer;
 
     @Column(name = "last_name_customer", nullable = false, length = 300)
+    @NotBlank(message = "O campo último nome é obrigatório!")
+    @Length(min = 2, max = 300, message = "O último nome deve ter ao menos dois caracteres!")
     private String lastNameCustomer;
 
     @Column(name = "cpf_customer", unique = true, nullable = false, length = 11)
@@ -40,7 +42,7 @@ public class Customer {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate birthdateCustomer;
 
-    @Column(name = "date_created_customer", nullable = false)
+    @Column(name = "date_created_customer", nullable = false, updatable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDate dateCreatedCustomer;
 
@@ -56,5 +58,10 @@ public class Customer {
 
     @Column(name = "password_customer", nullable = false, length = 3000)
     private String passwordCustomer;
+
+    @PrePersist
+    private void prePersist() {
+        this.setDateCreatedCustomer(LocalDate.now());
+    }
 
 }
