@@ -37,6 +37,9 @@ public class ProductService {
         Product product = new Product();
         product.setNameProduct(productDTO.getNameProduct());
         product.setDescriptionProduct(productDTO.getDescriptionProduct());
+        product.setEanProduct(productDTO.getEanProduct());
+        product.setSkuProduct(productDTO.getSkuProduct());
+        product.setPublishedProduct(productDTO.getPublishedProduct());
 
         product.setCostPriceProduct(converterData.convertingStringToBigDecimal(productDTO.getCostPriceProduct()));
         product.setAmountProduct(converterData.convertingStringToBigDecimal(productDTO.getAmountProduct()));
