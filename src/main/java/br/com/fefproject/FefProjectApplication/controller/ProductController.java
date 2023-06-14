@@ -28,7 +28,7 @@ public class ProductController {
         return ResponseEntity.ok().body(ResponseGenericException.response(result));
     }
 
-    @PostMapping(value = "/insert")
+    @PostMapping(value = "/create")
     @Operation(summary = "Method for save products in database")
     public ResponseEntity<Object> saveProduct(@RequestBody ProductDTO productDTO) {
         Product result = productService.saveProduct(productDTO);
