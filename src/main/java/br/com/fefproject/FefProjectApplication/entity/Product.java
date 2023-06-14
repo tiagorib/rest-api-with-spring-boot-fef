@@ -1,11 +1,13 @@
 package br.com.fefproject.FefProjectApplication.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @AllArgsConstructor
@@ -38,5 +40,13 @@ public class Product {
 
     @Column(name = "published_product", nullable = false)
     private Boolean publishedProduct;
+
+    @Column(name = "date_created_product", nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dateCreatedProduct;
+
+    @ManyToOne
+    @JoinColumn(name = "id_category")
+    private Category category;
 
 }

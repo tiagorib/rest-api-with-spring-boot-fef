@@ -61,6 +61,7 @@ public class Customer {
 
     @PrePersist
     private void prePersist() {
+        this.setStatusCustomer(true);
         this.setDateCreatedCustomer(LocalDate.now());
     }
 

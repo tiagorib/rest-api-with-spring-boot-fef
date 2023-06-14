@@ -1,8 +1,8 @@
 package br.com.fefproject.FefProjectApplication.controller;
 
+import br.com.fefproject.FefProjectApplication.dto.ProductDTO;
 import br.com.fefproject.FefProjectApplication.entity.Product;
 import br.com.fefproject.FefProjectApplication.exception.ResponseGenericException;
-import br.com.fefproject.FefProjectApplication.repository.ProductRepository;
 import br.com.fefproject.FefProjectApplication.service.ProductService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +30,8 @@ public class ProductController {
 
     @PostMapping(value = "/insert")
     @Operation(summary = "Method for save products in database")
-    public ResponseEntity<Object> saveProduct(@RequestBody Product product) {
-        Product result = productService.saveProduct(product);
+    public ResponseEntity<Object> saveProduct(@RequestBody ProductDTO productDTO) {
+        Product result = productService.saveProduct(productDTO);
         return ResponseEntity.ok().body(ResponseGenericException.response(result));
     }
 
@@ -45,7 +45,7 @@ public class ProductController {
     @GetMapping(value = "/findProduct/{idProduct}")
     @Operation(summary = "Method for find products by idProduct in database")
     public ResponseEntity<Object> findProduct(@PathVariable Long idProduct) {
-        Optional<Product> result = productService.findProductById(idProduct);
+        Product result = productService.findProductById(idProduct);
         return ResponseEntity.ok().body(ResponseGenericException.response(result));
     }
 
